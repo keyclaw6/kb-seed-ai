@@ -1,0 +1,32 @@
+# High-level overview of the KB Seed AI loop.
+# Render with: d2 diagrams/overview.d2 diagrams/out/overview.svg
+
+goal: Overarching Goal {
+  shape: document
+}
+
+agent: Seed Agent {
+  plan: Plan
+  act: Act
+  reflect: Reflect
+  improve: Self-Improve
+
+  plan -> act
+  act -> reflect
+  reflect -> improve
+  improve -> plan: next iteration
+}
+
+memory: Memory {
+  shape: cylinder
+}
+
+tools: Tools {
+  shape: package
+}
+
+goal -> agent.plan
+agent.act <-> tools
+agent.reflect <-> memory
+agent.improve -> tools: add / modify
+agent.improve -> agent: modify prompts/code
