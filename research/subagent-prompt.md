@@ -70,9 +70,18 @@ appending to it as you discover things. Don't hold everything in context and dum
 the end; writing as you go preserves a durable record and lets you track what you've
 already covered.
 
+**Use Mermaid diagrams to make the design visible.** Wherever a mechanism is clearer
+seen than read — the architecture, the control / improvement loop, the agent or role
+topology, data and state flow, the lifecycle of a candidate or experiment, or the
+verifier / promotion path — include an accurate Mermaid diagram in a fenced ```mermaid
+block (flowchart, sequenceDiagram, stateDiagram, or classDiagram — whichever fits).
+Include at least one architecture-or-loop diagram per source where it adds clarity, and
+more if the system is complex. Diagrams must reflect the ACTUAL system; they are
+explanatory, not decorative.
+
 1. **Identity** — name; what it is; authors/org; dates; primary links; code repo + commit SHA inspected (or "no code").
 2. **TL;DR** — 3–6 bullets: the essence, and why it matters (or doesn't) for us.
-3. **What it does & how it works** — mechanism-level, accurate, deep. The real architecture / loop, not the marketing.
+3. **What it does & how it works** — mechanism-level, accurate, deep. The real architecture / loop, not the marketing. **Include at least one Mermaid diagram here** of the architecture and/or the core loop.
 4. **Evidence from the code** — files/modules inspected (with paths); key mechanisms; verbatim excerpts of important prompts, the verifier/evaluator, and core data structures. If there is no code, say so and rely on the paper's described method.
 5. **What's genuinely smart** — the load-bearing ideas, explained correctly and deeply. This is the heart of the document.
 6. **Claims vs. reality / limitations / critiques** — what's overstated; failure modes (including any reward-hacking or test-gaming); reproducibility; independent critiques, with links.
