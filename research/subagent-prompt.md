@@ -18,6 +18,10 @@ design our system.
 
 ## Your mission
 
+**You are researching exactly ONE source: {{SOURCE_NAME}}.** One sub-agent handles one
+source — do not research or catalog others (reference them only where needed to understand
+this one).
+
 Produce a deep, accurate, richly-cited account of **{{SOURCE_NAME}}**: what it does, how
 it *actually* works, what is genuinely smart about it, where it falls short, and what (if
 anything) it teaches us about building a self-improving, evolutionary software-building
@@ -49,19 +53,19 @@ make that synthesis possible by being thorough and honest.
 4. **Separate claim from reality.** Clearly distinguish: (A) what the authors *claim*,
    (B) what the code/experiments actually *demonstrate*, (C) independent critiques,
    failures, and reproducibility concerns. Search explicitly for skeptical analyses.
-5. **Map to our lens.** For each of the 7 questions below, state what this source teaches
-   — or write "nothing useful here." Be specific.
-
-## Our 7 lens questions (the relevance filter — do NOT answer them, report against them)
-1. **Smallest viable seed** — minimum capabilities to bootstrap.
-2. **Goal representation** — how the overarching goal survives iterations and decomposes into testable sub-goals.
-3. **Hypothesis unit** — how a proposed change is represented, isolated, run.
-4. **The verifier** — what certifies "this adds value," kept unfakeable. (the crux)
-5. **Promotion gate & self-modification boundary** — rules to become champion; what the agent may change about itself; what's inviolable; where humans gate.
-6. **Search policy** — allocating compute across candidates; patience vs. pruning; stagnation detection.
-7. **Memory & unbounded runtime** — how past runs sharpen future proposals; how it runs ~forever.
+5. **Judge relevance by one test only:** *would this help build a self-improving,
+   evolutionary, software-building agent?* The test is deliberately broad — it includes
+   memory systems, running agents reliably over long horizons, making good decisions,
+   orchestration, verification, and practical control mechanisms from production coding
+   agents (e.g. goal-tracking / "/goal"-style features in Claude Code and Codex). Flag
+   anything that could plausibly help; ignore what clearly doesn't, and never force-fit.
 
 ## Output — write ONE markdown file to OUTPUT_PATH, with these sections
+
+**Write this file incrementally, as you research** — create OUTPUT_PATH early and keep
+appending to it as you discover things. Don't hold everything in context and dump it at
+the end; writing as you go preserves a durable record and lets you track what you've
+already covered.
 
 1. **Identity** — name; what it is; authors/org; dates; primary links; code repo + commit SHA inspected (or "no code").
 2. **TL;DR** — 3–6 bullets: the essence, and why it matters (or doesn't) for us.
@@ -69,7 +73,7 @@ make that synthesis possible by being thorough and honest.
 4. **Evidence from the code** — files/modules inspected (with paths); key mechanisms; verbatim excerpts of important prompts, the verifier/evaluator, and core data structures. If there is no code, say so and rely on the paper's described method.
 5. **What's genuinely smart** — the load-bearing ideas, explained correctly and deeply. This is the heart of the document.
 6. **Claims vs. reality / limitations / critiques** — what's overstated; failure modes (including any reward-hacking or test-gaming); reproducibility; independent critiques, with links.
-7. **Relevance to our 7 questions** — one short subsection per question (Q1…Q7): what it teaches, or "nothing useful here."
+7. **Relevance to a self-improving, evolutionary agent** — the specific ideas or mechanisms here that could help build one (memory, long-horizon running, decision-making, verification, orchestration, control features, etc.), each tied to what it would help with. If little applies, say so plainly.
 8. **Reusable assets** — concrete things we *could* borrow: prompts (verbatim), harness/scaffold patterns, control loops, data schemas, evaluation methods. Quote and cite precisely. (Collect them as evidence; do not assemble them into a design.)
 9. **Signal assessment** — honest overall value (**high / medium / low**), your confidence, and what you could NOT verify.
 10. **References** — every source, tagged primary/secondary, with working links; code references as `repo@SHA:path`.
@@ -77,6 +81,7 @@ make that synthesis possible by being thorough and honest.
 ## Rules
 - **Cite everything.** Every nontrivial claim gets a link or a `repo@SHA:path` reference.
 - **Primary evidence beats secondary.** Code, papers, and author statements over blogs and threads.
+- **Capture specifics, not summaries.** Record the source's ACTUAL prompts (verbatim), its concrete methodology, and the specific techniques that make it work — precisely cited — not vague paraphrase.
 - **Be honest about uncertainty and low signal.** "I could not verify X" is a valid and valuable statement.
 - **Do not design our system. Do not make adopt/reject calls.** Report only.
 - **Tight over long.** Depth and accuracy, not word count.

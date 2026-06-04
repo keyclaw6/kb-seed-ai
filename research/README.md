@@ -7,11 +7,12 @@ design.
 
 ## The process (recap)
 
-0. **Lens** — the design questions every source is read against. See `thinking/lens.md`.
-   Currently **OPEN** (used to focus research, not yet answered).
 1. **Canon** — the prioritized source list. See `sources.md`.
 2. **Ingest** — one Opus research sub-agent per source produces an immutable findings doc
-   in `findings/`, using `subagent-prompt.md`.
+   in `findings/`, using `subagent-prompt.md`. Relevance filter: *anything that would help
+   build a self-improving, evolutionary, software-building agent* — memory systems,
+   long-horizon running, decision-making, verification, orchestration, agent control
+   features, and so on.
 3. **Synthesize** — humans read all findings and *subtractively* design the MVP; notes
    live in `thinking/`.
 4. **MVP** — spec + build (later).
@@ -25,7 +26,7 @@ design.
   sub-agent. **Do not hand-edit.** Our reactions, picks, and rejections live in
   `thinking/`, never here.
 - `thinking/` — shared, freely-editable WIP for Kristian + the orchestrator: the mission,
-  the lens, synthesis notes, decisions.
+  synthesis notes, decisions.
 
 ## Why the separation
 
