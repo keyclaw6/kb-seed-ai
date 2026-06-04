@@ -62,6 +62,43 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 > Note: arXiv 2211.12003 is NOT the gemtest paper (it's an RMIT PBT-for-MT paper); the
 > Run-2 docs also flag claim-vs-code gaps in AI-Scientist-v2, ADAS, and SICA.
 
+## Run 3 (committed)
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 17 | EvolveR | paper + repo | https://github.com/KnowledgeXLab/EvolveR · arXiv 2510.16079 | `findings/evolver.md` | MEDIUM | done |
+| 18 | Ona — "Building a Software Factory" (+5 video transcripts) | story + repo + video | https://ona.com/stories/building-a-software-factory-week-1 | `findings/ona-software-factory.md` | MED–HIGH | done |
+| 19 | gastown / "Gas Town" (Steve Yegge) | repo | https://github.com/gastownhall/gastown | `findings/gastown.md` | MEDIUM | done |
+| 20 | "Solving a Million-Step LLM Task with Zero Errors" (MAKER/MDAP) | paper + repo | https://arxiv.org/abs/2511.09030 | `findings/arxiv-2511-09030.md` | MEDIUM | done |
+| 21 | octopusgarden + Willison on StrongDM's "software factory" | repo + blog | https://github.com/foundatron/octopusgarden · https://simonwillison.net/2026/Feb/7/software-factory/ | `findings/octopusgarden.md` | HIGH | done |
+| 22 | SWE-AF (Agent-Field) — multi-agent software factory | repo | https://github.com/Agent-Field/SWE-AF | `findings/swe-af.md` | MEDIUM | done |
+| 23 | fabro (Qlty / B. Helmkamp) — agent workflow engine | repo | https://github.com/fabro-sh/fabro | `findings/fabro.md` | MEDIUM | done |
+| 24 | "Continual Harness" (Gemini Plays Pokémon; Princeton/DeepMind) | paper + repo | https://arxiv.org/abs/2605.09998v1 · github.com/sethkarten/continual-harness | `findings/arxiv-2605-09998.md` | HIGH | done |
+| 25 | "How Lovable self-improves every hour" (B. Verbeek talk) | talk (transcript) | https://www.youtube.com/watch?v=KA5kPbdkK2E | `findings/yt-ka5kpbdkk2e.md` | MED–HIGH | done |
+| 26 | autoagent (kevinrgu / Third Layer) | repo | https://github.com/kevinrgu/autoagent | `findings/autoagent.md` | MED–HIGH | done |
+
+> Cross-cutting result of Run 3 (the "software factory" cluster + harness self-improvement):
+> - **The factories that don't collapse are GitHub/CI-native pipelines of single-purpose
+>   agents** coordinating through issues/PRs/labels ("loops, not an orchestrator" — Ona),
+>   with a deterministic **CI gate sitting OUTSIDE the LLM reviewer** as the only unfakeable
+>   signal. Same shape in SWE-AF, fabro, gastown.
+> - **octopusgarden + StrongDM is the closest public match to our propose→test→keep loop:**
+>   sealed holdout scenarios + probabilistic LLM-judge, *structurally enforced* (the
+>   proposer package literally cannot import the verifier). But it's hill-climbing, not
+>   evolution, and generator+judge share a model family → correlated blind spots (Goodhart).
+> - **Safe self-improvement targets the HARNESS, gated by a hard external verifier:**
+>   Continual Harness (CRUD-able prompt/sub-agents/skills/memory, in-place refinement) and
+>   autoagent (editable candidate / FROZEN oracle; keep-if-`passed`-improved) — both echo
+>   Karpathy's autoresearch (#4). Continual Harness's 1,003-turn broken loop (842 identical
+>   failed calls while "self-assessing progress") is the cautionary proof that an external
+>   verify-and-promote gate + auto-revert is non-negotiable.
+> - **Reusable verification hygiene:** anti-reward-hacking CI prompts ("verify rendered
+>   output, not tokens"; forbidden test-gaming lists) recur in Ona/SWE-AF/fabro/autoagent;
+>   MAKER's "decompose to one decision, vote first-to-ahead-by-k, discard malformed samples"
+>   restores i.i.d. errors; Lovable's holdout/blank-injection causal eval keeps only what
+>   verifiably helps. EvolveR contributes a self-curating memory lifecycle (distill → dedup
+>   → merit-score → prune).
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
