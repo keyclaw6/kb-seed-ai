@@ -126,6 +126,41 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 >   top-K) for an earned, non-bloated tool library, and a weak-vs-strong verifier contrast
 >   (exit-code-0 is gameable; route promotions through a ground-truth executable reward).
 
+## Run 5 (committed) — the verification deep-dive
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 32 | LLMorpheus (LLM mutation testing) + llmorph (metamorphic testing of LLMs) | repos + paper | https://github.com/githubnext/llmorpheus · https://github.com/steven-b-cho/llmorph | `findings/llmorpheus.md` | MED–HIGH / low | done |
+| 33 | CLEVER — end-to-end *verified* codegen in Lean 4 (NeurIPS'25) | repo + paper | https://github.com/trishullab/clever | `findings/clever.md` | MED–HIGH | done |
+| 34 | "From Natural Language to Verified Code" (NL2VC-60, Dafny) | paper | https://arxiv.org/abs/2604.22601 | `findings/arxiv-2604-22601.md` | LOW–MED | done |
+| 35 | DiffSpec — LLM differential testing from specs (CMU+MSR) | paper + artifact | https://arxiv.org/abs/2410.04249 | `findings/arxiv-2410-04249.md` | LOW–MED | done |
+| 36 | G-Eval — the canonical LLM-as-judge (MSR, EMNLP'23) | paper + repo | https://arxiv.org/abs/2303.16634 | `findings/arxiv-2303-16634.md` | MED–HIGH | done |
+| 37 | "Replacing Judges with Juries" — PoLL panel (Cohere) | paper | https://arxiv.org/abs/2404.18796 | `findings/arxiv-2404-18796.md` | MEDIUM | done |
+| 38 | "Evaluating Scoring Bias in LLM-as-a-Judge" (Ant Group) | paper | https://arxiv.org/abs/2506.22316 | `findings/arxiv-2506-22316.md` | MEDIUM | done |
+
+> Cross-cutting result of Run 5 — this batch is almost entirely about the VERIFIER, and it
+> splits into three families, all reinforcing the same rule:
+> - **Formal / deterministic oracles** (un-gameable in principle): CLEVER (Lean 4 — compiles
+>   AND no `sorry`) and NL2VC (Dafny→Z3). BUT only as good as the spec — CLEVER's follow-up
+>   found ~50% of ground-truth specs buggy and agents near-saturating it; NL2VC caught LLMs
+>   gaming the verifier with *vacuous specs*, fixed by adding an independent functional
+>   oracle the generator didn't author. So: guard the spec (non-computable specs + dual
+>   independent oracles).
+> - **Ground-truth-free verification:** DiffSpec (N independent implementations as a mutual
+>   oracle via disagreement) and LLMorpheus (LLM-generated mutants — a *surviving* mutant is
+>   a concrete, ground-truthed test-suite gap; i.e. "test the tests"). Both decouple the
+>   judged entity from the judge.
+> - **LLM-as-judge, done right:** G-Eval is the origin — and it FIRST named our exact hazard
+>   ("self-reinforcement if the score is used as a reward signal," 2023). PoLL = a cross-vendor
+>   jury cancels self-preference and is 7–8× cheaper, but Apple's "Nine Judges, Two Effective
+>   Votes" shows correlated errors (diversity ≠ independence). The scoring-bias study: absolute
+>   scores flip up to 46% on a cosmetic rubric reorder → prefer pairwise / repeat-and-vote /
+>   hard verifiers, and note whoever controls the reference answer moves the score.
+> Net for our verifier: hard/formal oracle where a spec exists (but guard it); ground-truth-free
+> methods (differential, mutation) where it doesn't; LLM-judges only for non-verifiable quality,
+> decorrelated from the proposer, pairwise not absolute, validated against humans. LLMorpheus
+> gives us a way to verify our OWN tests aren't vacuous.
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
