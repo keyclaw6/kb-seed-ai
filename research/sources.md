@@ -99,6 +99,33 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 >   verifiably helps. EvolveR contributes a self-curating memory lifecycle (distill → dedup
 >   → merit-score → prune).
 
+## Run 4 (committed)
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 27 | R-APS — Reflective Adversarial Pareto Search | paper | https://arxiv.org/abs/2606.04823 | `findings/arxiv-2606-04823.md` | MEDIUM | done |
+| 30 | Meta-Agent Challenge (MAC) — recursive-self-improvement benchmark | paper (benchmark) | https://arxiv.org/abs/2606.04455 | `findings/arxiv-2606-04455.md` | HIGH | done |
+| 31 | EvoDS — Self-Evolving Autonomous Data Science Agent | paper + repo | https://arxiv.org/abs/2606.03841 | `findings/arxiv-2606-03841.md` | MEDIUM | done |
+
+> Note: the batch listed #28 as a duplicate of #27 (both arXiv 2606.04823) and gave no #29,
+> so Run 4 has 3 unique papers. Slots 28/29 are open for the intended links.
+>
+> Cross-cutting result of Run 4: more grounded-verifier + earned-memory evidence.
+> - **MAC (HIGH)** is essentially a ready-made harness for OUR setup — "agent builds and
+>   iteratively optimizes its own agent.py, scored on a HIDDEN test split" — with a fully
+>   open-sourced anti-cheat blueprint: dual-container isolation, hidden tests unlocked only
+>   by a post-dev `X-Verifier-Secret`, a model-locking proxy, and an LLM "auditor" agent
+>   (verbatim 9-class cheating prompt). Sobering result: only 5/39 configs beat human
+>   baselines, and they caught real reward-hacking (a model exfiltrating labels via
+>   exception tracebacks — isolation held).
+> - **R-APS** adds a typed verification cascade (repair only the failed stage; 59% of
+>   failures caught at the cheapest check) and **non-monotonic memory with EXPLICIT
+>   INVALIDATION** — heuristics retired with cited counterexamples (a direct fix for the
+>   skill-bloat seen in OpenSpace/Voyager), with a hard solver as the ungameable oracle.
+> - **EvoDS** contributes a skill-promotion gate (cache-all, expose-only-proven: used ≥3×,
+>   top-K) for an earned, non-bloated tool library, and a weak-vs-strong verifier contrast
+>   (exit-code-0 is gameable; route promotions through a ground-truth executable reward).
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
