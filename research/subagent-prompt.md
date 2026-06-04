@@ -37,9 +37,12 @@ make that synthesis possible by being thorough and honest.
 
 ## How to research (do everything that applies)
 
-1. **Find the primary sources.** Locate the canonical paper(s), official blog post(s),
-   talk(s), and author statements. Prefer primary over secondary reporting. Follow
-   citations outward.
+1. **Start from the given link(s), then search far beyond them.** The starting link(s)
+   are a seed, not a boundary. Actively pull in everything relevant you can find: the
+   project's own site and docs, READMEs and wikis, the paper(s), author talks and
+   threads, blog posts, issue trackers and discussions, and independent analyses or
+   critiques. Prefer primary over secondary sources, and follow citations outward. Your
+   goal is the most comprehensive, accurate picture possible — not a summary of one URL.
 2. **Get the code, if any exists.** Clone the official repo:
    `git clone --depth 1 <repo>` — git is preconfigured for the sandbox proxy. If a clone
    fails, download the tarball instead:
