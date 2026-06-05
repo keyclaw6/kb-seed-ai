@@ -201,6 +201,35 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 > tracking), training-time self-improvement (RLVR / execution-feedback RL), secure-execution
 > sandboxing infra, compute-scheduling / parallel-search economics, codebase-comprehension at scale.
 
+## Run 7 (committed) — orchestration substrate
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 43 | ClawTeam (HKUDS) — multi-agent swarm orchestration | repo | https://github.com/HKUDS/ClawTeam | `findings/clawteam.md` | MEDIUM | done |
+| 44 | Temporal — durable execution / workflow engine | repo + site | https://temporal.io/ · https://github.com/temporalio/temporal | `findings/temporal.md` | HIGH (orchestration substrate) | done |
+
+> Cross-cutting result of Run 7 (the long-horizon RUNTIME substrate — a medium gap, now in good shape):
+> - **Temporal (HIGH for the runtime question) is a near-1:1 off-the-shelf substrate** for our
+>   long-running loop, and a real buy-vs-build candidate. Durable state via event-sourcing +
+>   deterministic REPLAY (state rebuilt from an append-only event log, not a RAM snapshot);
+>   declarative retries/timeouts; durable timers; child-workflow fan-out for parallel candidates; and
+>   **Continue-As-New = built-in bounded-history self-succession** — the exact pattern Antigravity
+>   hand-rolled. The determinism-vs-LLM tension resolves cleanly: all LLM/tool/test calls are
+>   **Activities** (run once, recorded, never re-run on replay). Caveat: versioning friction if the
+>   orchestrator code self-modifies → keep the workflow thin/stable, evolving logic in activities.
+> - **ClawTeam (MEDIUM)** = HKUDS swarm: a leader CLI spawns workers, each in its own git-worktree +
+>   tmux + identity, deps via file/ZeroMQ inboxes, worktrees merged back; orchestration = plain shell
+>   + auto-injected MCP tools (any CLI agent, no SDK). Resolves the lab lineage: ClawWork (solo) →
+>   OpenSpace (skill-evolution) → ClawTeam (swarm). Reusable: worktree-per-candidate isolation, atomic
+>   locked JSON state store with cycle-checked dependency auto-unblock, the "Ralph re-spawn loop" +
+>   context-recovery prompt, a plan→execute→verify phase-gate machine. Cautionary: "self-evolving" is
+>   marketing (grep-confirmed zero fitness/selection code), and `SuccessCriterion.test_command` is
+>   defined but NEVER executed — gates trust self-reported completion (the verify-before-keep gap again).
+>
+> Still-open gaps after Run 7: goal/spec DECOMPOSITION, training-time self-improvement (RLVR /
+> execution-feedback RL), secure-execution sandboxing, compute-scheduling early-stopping (the
+> selection side is covered; the systems side is thin), codebase-comprehension at scale.
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
