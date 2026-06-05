@@ -270,6 +270,44 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 > New references surfaced (candidates for a later run): Stanford "Meta-Harness" (arXiv 2603.28052) and
 > ACE / Agentic Context Engineering (Stanford + SambaNova).
 
+## Run 9 (committed) — production factories + harness-builder scaffolds
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 50 | "Mergeable by default: the context engine" — Peter Werry (Unblocked) | talk | https://www.youtube.com/watch?v=5ID22ACI7IM | `findings/yt-5id22aci7im.md` | MEDIUM | done |
+| 51 | "Building your own software factory" — Eric Zakariasson (Cursor) | talk | https://www.youtube.com/watch?v=rnDm57Py54A | `findings/yt-rndm57py54a.md` | MED–HIGH | done |
+| 52 | GenericAgent (lsdefine / Fudan A3 Lab) | repo + paper | https://github.com/lsdefine/GenericAgent · arXiv 2604.17091 | `findings/genericagent.md` | HIGH | done |
+| 53 | Archon (coleam00) — open-source harness builder (YAML-DAG) | repo | https://github.com/coleam00/archon | `findings/archon.md` | MEDIUM | done |
+| 54 | DeerFlow 2.0 (ByteDance) — super-agent harness | repo | https://github.com/bytedance/deer-flow | `findings/deer-flow.md` | LOW–MED | done |
+| 55 | compound-engineering-plugin (Every Inc / Kieran Klaassen) | repo | https://github.com/EveryInc/compound-engineering-plugin | `findings/compound-engineering-plugin.md` | MED–HIGH | done |
+
+> Cross-cutting result of Run 9 (production "factories" + reusable harness scaffolds):
+> - **Two production factory talks.** Cursor (Zakariasson) and Unblocked (Werry) converge on:
+>   verifiability is the gate; **error-driven rule synthesis** = harness-only self-improvement *in
+>   production* ("off-the-rails event → mint a rule"); planner→worker→judge with **fresh-start
+>   anti-drift**; "**the prompts matter more than the harness**"; flat peer coordination is
+>   *documented to fail*; and context quality is the new bottleneck.
+> - **compound-engineering-plugin (Every) is the standout** and near our exact design: `/ce-optimize`
+>   is a hand-written propose→test→keep evolutionary loop, HARNESS-ONLY — hypothesis backlog
+>   (population) → git-worktree experiments (variation) → three-tier fitness (hard gates → LLM-judge
+>   → diagnostics) → KEEP-if-beats-noise / REVERT → file-disjoint recombination → learnings→next
+>   hypotheses. Crucially the evaluator lives in `scope.immutable`: **"the agent cannot game the
+>   metric by changing how it is measured"** — our structural-isolation rule, verbatim. Plus a
+>   file-based compounding-memory loop with an AGENTS.md discoverability edit. Cites Karpathy autoresearch.
+> - **Two harness-builder scaffolds** (to build a seed-AI ON, not seed-AIs themselves): Archon pivoted
+>   to a deterministic YAML-DAG workflow engine (loop-until-verified nodes, worktree isolation, human
+>   gates, disk-as-memory; `archon-adversarial-dev` = GAN-style generator/adversary + numeric
+>   threshold). DeerFlow 2.0 = a "super-agent harness" with an editable 14-stage middleware chain (a
+>   harness-only self-mod target) + subagent fan-out/fan-in (parallel-exploration substrate) +
+>   fail-closed gate on self-written skills.
+> - **GenericAgent (HIGH)** = "No Execution, No Memory" verification-gated skill crystallization + an
+>   independent adversarial verifier (verify_sop + VERDICT interception) + context-density-max + agent-
+>   as-CLI orchestration. Contrast: it evolves knowledge around a FIXED harness (the inverse of ours).
+>
+> Net: more mature precedent for the harness-only propose→test→keep loop (compound-engineering ≈ our
+> design), two reusable harness substrates, and the **structural-isolation-of-the-evaluator** principle
+> now independently confirmed across meta-agent, octopusgarden, GenericAgent, and compound-engineering.
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
