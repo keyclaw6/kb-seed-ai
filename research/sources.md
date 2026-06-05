@@ -230,6 +230,46 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 > execution-feedback RL), secure-execution sandboxing, compute-scheduling early-stopping (the
 > selection side is covered; the systems side is thin), codebase-comprehension at scale.
 
+## Run 8 (committed) — the harness-only self-improvement cluster
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 45 | meta-agent (Canvas Labs, YC F24) — harness-only recursive self-improvement | repo | https://github.com/canvas-org/meta-agent | `findings/meta-agent.md` | HIGH | done |
+| 46 | autocontext (greyhaven-ai) — recursive self-improving harness (~111K LOC) | repo | https://github.com/greyhaven-ai/autocontext | `findings/autocontext.md` | HIGH (arch) | done |
+| 47 | recursive-improve (kayba-ai) — harness self-improvement (ACE-based) | repo | https://github.com/kayba-ai/recursive-improve | `findings/recursive-improve.md` | MEDIUM | done |
+| 48 | reflexio (ReflexioAI) — playbook-mining self-improvement sidecar | repo | https://github.com/ReflexioAI/reflexio | `findings/reflexio.md` | MEDIUM | done |
+| 49 | RecursiveMAS — recursive multi-agent in LATENT space | paper + repo | https://arxiv.org/abs/2604.25917 | `findings/arxiv-2604-25917.md` | LOW | done |
+
+> Cross-cutting result of Run 8 — this batch is DIRECT prior art for our now-locked HARNESS-ONLY path:
+> meta-agent, autocontext, and recursive-improve all do exactly what we committed to (edit
+> prompts/tools/skills/memory/orchestration; freeze weights), and they CONVERGE on the same verifier
+> design — a held-out / holdout split + generalization-gap blocking + keep-only-if-verifiably-better,
+> with explicit anti-Goodhart guards.
+> - **meta-agent (HIGH)** = the closest map to our setup; reimplements Stanford "Meta-Harness"
+>   (arXiv 2603.28052 — a NEW reference worth adding). Most reusable: the **harness=behavior /
+>   benchmark=exit-contract** split where benchmark-injected tools/hooks WIN conflicts (the agent
+>   structurally cannot override the verifier) + a graduated cheap-first verification gauntlet + a
+>   three-layer holdout firewall + an anti-Goodhart prompt contract. Weakness: greedy hill-climb, no
+>   population (matches our "defer the archive" call).
+> - **autocontext (HIGH arch)** = the best anti-overfit/anti-judge-gaming design in the canon: a
+>   layered gate stack (validity-retry budget → holdout generalization-gap block → LLM-judge-vs-oracle
+>   gap block → adversarial skeptic) + typed, revertible, individually-gated harness mutations. Watch-out:
+>   permissive gate defaults (missing marker → "accept") — a hole to avoid.
+> - **recursive-improve (MEDIUM)** = trace capture via SDK monkey-patch; ACE-based (Agentic Context
+>   Engineering — another new reference) edits on a git branch; /ratchet overnight keep-or-revert;
+>   /evolve git-worktree island model. Verifier weak by default (self-defined metrics) but a real
+>   held-out one is pluggable (terminal-bench).
+> - **reflexio (MEDIUM)** = playbook-mining sidecar; GEPA-based held-out paired-rollout commit-if-better;
+>   post-consequence horizon-gated reflection (re-judge a memory only after seeing downstream
+>   consequences — credit assignment); MDL memory consolidation. Verifier = LLM judge (weak for code).
+> - **RecursiveMAS (LOW)** = recursive multi-agent in LATENT space via trainable adapters → doubly
+>   disqualified (weights + opaque latent messages, anti-verifiable). Useful "opposite conclusion":
+>   text is a lossy boundary, which for a verifiable harness-only agent argues FOR inspectable text
+>   artifacts (the road we take).
+>
+> New references surfaced (candidates for a later run): Stanford "Meta-Harness" (arXiv 2603.28052) and
+> ACE / Agentic Context Engineering (Stanford + SambaNova).
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
