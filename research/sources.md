@@ -161,6 +161,46 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 > decorrelated from the proposer, pairwise not absolute, validated against humans. LLMorpheus
 > gives us a way to verify our OWN tests aren't vacuous.
 
+## Run 6 (committed) — goal-steering + memory
+
+> Kristian provided these as #35–38; renumbered 39–42 to avoid collision with Run 5's #35–38.
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 39 | Agent "goal" features — OpenAI Codex vs Claude Code | docs (compare) | https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex · https://code.claude.com/docs/en/goal | `findings/agent-goals.md` | MED–HIGH | done |
+| 40 | superpowers (obra / Jesse Vincent) — agentic skills framework | repo | https://github.com/obra/superpowers | `findings/superpowers.md` | MEDIUM | done |
+| 41 | Graphiti (getzep) — bi-temporal knowledge-graph memory | repo | https://github.com/getzep/graphiti | `findings/graphiti.md` | MED–HIGH (memory) | done |
+| 42 | cognee (topoteretes) — ECL knowledge-graph memory engine | repo | https://github.com/topoteretes/cognee | `findings/cognee.md` | MED–HIGH (memory) | done |
+
+> Cross-cutting result of Run 6 (fills the MEMORY pillar + the goal-steering half of planning):
+> - **Goal features = the INNER goal-steering loop** (not the evolutionary outer loop), and both
+>   name FALSE COMPLETION as the primary long-horizon risk. Codex `/goal` = durable `ThreadGoal`
+>   SQLite state + token/wall-clock budgets + distinct terminal states (complete / budget_limited /
+>   blocked) + a same-model paranoid completion self-audit (verbatim `continuation.md`: re-anchor +
+>   requirement-by-requirement audit + anti-reward-hack "Fidelity" language). Claude Code `/goal` =
+>   a session Stop-hook where a *separate cheap* model (Haiku, transcript-only, no tools) returns
+>   yes/no+reason — Codex's durable design avoids Claude Code's documented evaluator-overflow wedge.
+>   (Fills goal *tracking*; goal *decomposition*/spec is still open.)
+> - **Graphiti = the standout for our memory-invalidation need:** bi-temporal facts with
+>   INVALIDATE-DON'T-DELETE (transaction time `created_at`/`expired_at` + valid time
+>   `valid_at`/`invalid_at`); contradiction = LLM judgment + deterministic date-stamping (clean
+>   fuzzy/deterministic split); deterministic-first dedup (MinHash/Jaccard + entropy gate); LLM-free
+>   hybrid retrieval (cosine+BM25+BFS fused via RRF/MMR). Caveat: conversational/relational ontology,
+>   not procedural/program memory.
+> - **cognee** = ECL (Extract→Cognify→Load) into graph+vector; `DataPoint` = node+vector with UUID5
+>   content-addressed dedup + mutable trust weights; a CLOSED FEEDBACK LOOP (retrieval logs used
+>   element ids → feedback re-weights those edges via EMA — swap the human rating for our verifier's
+>   pass/fail) + proposal-first `improve_skill` (audited self-modification). Weaker temporal model
+>   than Graphiti (append-only + hard delete).
+> - **superpowers** = agentic skills framework + SWE methodology (brainstorm→spec→worktree→plan→
+>   subagent→TDD→review→finish); forced-invocation bootstrap; "TDD for prompts" (pressure-test a
+>   skill on subagents, harvest rationalizations, write counters); adversarial artifact-grounded
+>   verification ("Do Not Trust the Report — check the VCS diff"). "Disciplined, not smarter" (n=12).
+>
+> Still-open gaps after Run 6 (from the coverage analysis): goal/spec DECOMPOSITION (not just
+> tracking), training-time self-improvement (RLVR / execution-feedback RL), secure-execution
+> sandboxing infra, compute-scheduling / parallel-search economics, codebase-comprehension at scale.
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
