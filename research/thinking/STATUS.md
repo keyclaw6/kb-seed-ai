@@ -26,7 +26,7 @@ better → repeat.**
 ## Repo map
 - `research/sources.md` — the canon: every source, grouped by run, with signal + a cross-cutting
   synthesis note per run. READ THIS after this file.
-- `research/findings/*.md` — 53 IMMUTABLE per-source research docs (one per source), each a fixed
+- `research/findings/*.md` — 54 IMMUTABLE per-source research docs (one per source), each a fixed
   10-section structure + Mermaid diagrams + verbatim prompts/mechanisms. DO NOT hand-edit them.
 - `research/subagent-prompt.md` — the brief used to research each source (one Opus sub-agent per
   source; search beyond the seed link; clone & read the real code; Mermaid required).
@@ -35,13 +35,13 @@ better → repeat.**
 - `diagrams/` (D2), `docs/` — original skeleton (open questions superseded by this file).
 
 ## Where we are
-Research phase COMPLETE: 9 runs, **53 sources** ingested (full table in `sources.md`). Now entering
+Research phase COMPLETE: 10 runs, **54 sources** ingested (full table in `sources.md`). Now entering
 the ARCHITECTURE phase. No system code written yet — by design. (Sources are still added
-occasionally; latest is Run 9 — production "factory" talks + harness-builder scaffolds, incl. Every's
+occasionally; latest is Run 10 — a multi-agent orchestration-patterns talk; Run 9 added production "factory" talks + harness-builder scaffolds, incl. Every's
 compound-engineering, which is close to our exact harness-only propose→test→keep design.)
 
 ## The corpus in one breath (the convergent finding)
-Across 53 sources the result is overwhelming and consistent:
+Across 54 sources the result is overwhelming and consistent:
 - **The verifier is the differentiator.** Systems with a GROUNDED, hard-to-game evaluator (formal:
   CLEVER/NL2VC; ground-truth-free: LLMorpheus mutation, DiffSpec differential; executable hidden
   tests: DGM/HGM/MAC; runs-the-actual-thing: AlphaEvolve/DRQ) make open-ended search pay off.
@@ -67,7 +67,7 @@ Across 53 sources the result is overwhelming and consistent:
 ## Agreed design METHOD
 Do NOT make one big "design the architecture" decision (the unreliable-decider trap). Instead:
 1. Decompose the architecture into **seams** (decision points).
-2. Per seam, lay out the **evidenced options drawn verbatim from the 53 findings**, scored against
+2. Per seam, lay out the **evidenced options drawn verbatim from the 54 findings**, scored against
    the locked constraints.
 3. Classify each: **DECIDE-NOW** (evidence + constraints settle it) vs **DEFER-TO-EXPERIMENT**
    (genuinely uncertain + cheap to A/B → let the minimal loop adjudicate once it runs).

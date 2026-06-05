@@ -308,6 +308,21 @@ single immutable doc to `findings/<slug>.md` and we update the row's status + li
 > design), two reusable harness substrates, and the **structural-isolation-of-the-evaluator** principle
 > now independently confirmed across meta-agent, octopusgarden, GenericAgent, and compound-engineering.
 
+## Run 10 (committed) — multi-agent orchestration patterns
+
+| # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
+|---|------|------|-----------------|--------------|--------|--------|
+| 56 | "From Chaos to Choreography: Multi-Agent Orchestration Patterns" — Sandipan Bhaumik (Databricks) | talk | https://www.youtube.com/watch?v=2czYyrTzILg | `findings/yt-2czyyrtzilg.md` | MEDIUM | done |
+
+> Cross-cutting result of Run 10: a distributed-systems lens on agent reliability — low novelty
+> (textbook patterns re-skinned onto agents) but a clean, borrowable substrate for our run/verify/
+> rollback layer: (1) immutable, versioned, append-only state with schema-validated handoffs →
+> replay + binary-search debugging + cheap rollback (a good model for the experiment/candidate
+> ledger in a propose→test→keep loop); (2) data contracts as boundary gates with a quality
+> threshold (`confidence > 0.7`) → a lightweight inter-stage verifier/promotion check; (3) circuit
+> breaker + saga (`execute`/`compensate`, reverse-order unwind) → long-horizon reliability and safe
+> rollback of side-effecting build steps. No code repo (slide-ware); transcript + slide deck captured.
+
 ## Backlog (queued / from deep-search)
 
 | # | Name | Type | Primary link(s) | Findings doc | Signal | Status |
